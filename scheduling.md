@@ -15,10 +15,11 @@
 
 ## Capacity
 - Upper bound of the throughput.
-- Question, isn't capacity basically capacity? Yes, whichever hits bottleneck, that is the capacity.
+- Question, isn't capacity basically bottleneck? Yes, whichever hits bottleneck, that is the capacity.
 
 ## Response time
 - Response time is "request completed time" - "request sent time from the client"
+- So, entering of server queue and complete processing time by server.
 
 ## Speed Up && Slowdown
 - We USUALLY measure `speed up` and `slowdown` by comparing response time.
@@ -74,7 +75,7 @@ Notice that:
     - In an network of queues, each queue can be analyzed in isolation of all others. Then add them up together.
 - Assumptions: 
     1. System is in a steady state (Input and output are equal. What goes in, goes out)
-    2. Arrivals from outside are posison distributed
+    2. Arrivals from outside are poisson distributed
     3. Service times for all servers are exponential
     4. No finite queues (For example: M/M/1/K model)
 
@@ -161,7 +162,7 @@ Response time: The time elapsed from when a job is ready to when it finishes.
 
 ## Schedule Policies
 - First In First Out (FIFO): Non-preemptive scheduling where the requests are processed in order.
-- Round Robin (RR): Pre-emptive version of FIFO. This is the prevent long jobs from dominating. (Smaller the quantum = more fair it is. But watch out for the overhead since context switching can be costly operation!)
+- Round Robin (RR): Pre-emptive version of FIFO. This prevents long jobs from dominating. (Smaller the quantum = more fair it is. But watch out for the overhead since context switching can be costly operation!)
 - Shortest Job Next (SJN) or First (SJF): Non-preemptive scheduling algorithm that prioritizes the shorter job to minimize the overall response time. (Bad starvation for the longest job length, making the system `less predictable` than FIFO)
 - Shortest Remaining Time (SRT): Pre-emptive version of SJN that further optimize response time for short task by allowing jobs to be interrupted if shorter job arrives. (Even WORSEEEEE starvation than the SJN!)
 - Highest Slowdown Next (HSN): Non-preemptive scheduling strategy designed to address starvation problem in SJN and SRT by prioritizing job based their accumulated `slowdown`. 
@@ -256,7 +257,7 @@ Response time: The time elapsed from when a job is ready to when it finishes.
 3. EDF-First Fit (EDF-FF): 
     - Tasks are sorted and assigned to `processors` in first-fit matter. (We need to have MULTIPLE processors or resources)
     - For each task, check schedulability on the first processor. If it fails, then move to next processor.
-    - RM-FF guarantees schedulability if:
+    - EDF-FF guarantees schedulability if:
 
     U = Σ(C<sub>i</sub> / T<sub>i</sub>)
 
@@ -274,7 +275,7 @@ Response time: The time elapsed from when a job is ready to when it finishes.
 # Synchronization | Mutual Exclusion
 - **Definition**: Management of shared resource in concurrent computing
 - Why do we need to worry about the shared resource?
-    - Simply to avoid the `data race` or `race condition`. What that really means is the `critical section` where the storage of the shared data must be updated correctly. In order to protect the critical section, we need to have one data write operation at a time. Let's me give you example.
+    - Simply to avoid the `data race` or `race condition`. What that really means is the `critical section` where the storage of the shared data must be updated correctly. In order to protect the critical section, we need to have one write operation at a time. Let's me give you example.
 
         Let's say we have process `A` and `B`. They are doing the same operation, which is incrementing 1 integer value at a time:
 
