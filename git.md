@@ -62,3 +62,4 @@ Summary<br/>
 ✅ Use git push — from your own branch<br/>
 ✅ Use git pull often to stay in sync<br/>
 ❌ Never push directly into main unless...
+![images](https://github.com/user-attachments/assets/1a95e2dc-ce7b-40b0-8c49-017bdf6f2eaa)
